@@ -1,0 +1,21 @@
+@ScoringAPI_HostAddress = http://localhost:5029
+
+POST {{ScoringAPI_HostAddress}}/api/v1/customer/score/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "rating": "Bad",
+  "monthlyIncome": 500
+}
+
+###
+
+POST {{ScoringAPI_HostAddress}}/api/v1/customer/score/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "rating": "Bad",
+  "monthlyIncome": 1000
+}
