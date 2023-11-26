@@ -13,7 +13,7 @@ to break dependencies in code.
 
 ---
 
-DMN handles decision and calculate score...
+DMN handles decision and calculates score...
 
 ![Customer Scoring Decision (DMN)](./ScoringAPI/Camunda/img/customer-score-decision.png)
 
@@ -23,11 +23,11 @@ with decision table using Collect (sum) policy as described on https://docs.camu
 
 ![Customer Scoring Process](./ScoringAPI/Camunda/img/customer-score-table.png)
 
+---
+
 ## Dapr
 
-To test locally install Dapr as described on https://docs.dapr.io/getting-started/install-dapr-selfhost/.
-
-To run in Docker, no install is needed.
+To test locally install Dapr as described on https://docs.dapr.io/getting-started/install-dapr-selfhost/. To run in Docker, no install is needed.
 
 ## Camunda
 
@@ -37,10 +37,10 @@ The process will be orchestrated by Camunda - in our case it's Camunda Platform 
 
 Navigate to http://localhost:8081/login and use demo/demo for login.
 
-Now deploy a process. One way how to do it is from Camunda Modeler. 
+Now deploy the process. One way how to do it is from Camunda Modeler. 
 It can be downloaded from https://camunda.com/download/modeler/.
 
-![Deploy](./Camunda/img/process-deploy.png)
+![Deploy](./ScoringAPI/Camunda/img/process-deploy.png)
 
 ## Run 
 
