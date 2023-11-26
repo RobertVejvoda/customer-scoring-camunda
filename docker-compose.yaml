@@ -1,0 +1,35 @@
+﻿version: "3.7"
+
+services:
+  scoring-api:
+    container_name: scoring-api
+    image: scoring-api
+    build:
+      context: .
+      dockerfile: ScoringAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5029:8080"
+         
+  scoring-api-dapr:
+    container_name: scoring-api-dapr
+    image: daprio/daprd:1.12.0
+    network_mode: "service:scoring-api"
+    command: ["./daprd",
+               "-app-id", "scoring-api",
+               "-app-port", "80",
+               "-components-path", "/components",
+               "-config", "/configuration/zipkin.yaml"]
+    depends_on: 
+      - scoring-api
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+        
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    restart: unless-stopped
+    ports:
+      - "9414:9411"

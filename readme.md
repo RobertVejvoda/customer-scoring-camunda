@@ -9,19 +9,19 @@ Workflow handles a request to score customer according to his/her history and cu
 The scoring result could be used later for pricing and is done synchronously. This is useful in API calls and helps
 to break dependencies in code.
 
-![Customer Scoring Process](./Camunda/img/customer-scoring-process.png)
+![Customer Scoring Process](./ScoringAPI/Camunda/img/customer-scoring-process.png)
 
 ---
 
 DMN handles decision and calculate score...
 
-![Customer Scoring Decision (DMN)](./Camunda/img/customer-score-decision.png)
+![Customer Scoring Decision (DMN)](./ScoringAPI/Camunda/img/customer-score-decision.png)
 
 ---
 
 with decision table using Collect (sum) policy as described on https://docs.camunda.io/docs/components/best-practices/modeling/choosing-the-dmn-hit-policy/
 
-![Customer Scoring Process](./Camunda/img/customer-score-table.png)
+![Customer Scoring Process](./ScoringAPI/Camunda/img/customer-score-table.png)
 
 ## Dapr
 
@@ -44,8 +44,7 @@ It can be downloaded from https://camunda.com/download/modeler/.
 
 ## Run 
 
-Local: Navigate to ScoringAPI folder and run: 
-`dapr run --app-id scoring-api --app-port 6029 --components-path ../dapr/components -- dotnet run --urls http://localhost:5029`
+Local: `dapr run --app-id scoring-api --app-port 6029 --components-path ../dapr/components -- dotnet run --urls http://localhost:5029`
 
 Docker: `docker compose -f docker-compose.yaml up -d`
 
@@ -53,7 +52,7 @@ Open ScoringAPI.http and run requests.
 
 ## Logs
 
-See logs in Zipkin: http://localhost:9411
+See logs in Zipkin: http://localhost:9411 (with local Dapr install) or http://localhost:9414 (Docker).
 
 ## Clean up
 

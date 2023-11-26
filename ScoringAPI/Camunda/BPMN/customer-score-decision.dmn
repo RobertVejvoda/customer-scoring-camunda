@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1xd4hme" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+  <decision id="customerScoreDecision" name="Customer Score">
+    <informationRequirement id="InformationRequirement_04uv42e">
+      <requiredInput href="#rating" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_10zmdt0">
+      <requiredInput href="#monthlyIncome" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1szgw37" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="Input_1" label="Rating (past experience)">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>rating</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1agbhe4" label="Current monthly net income">
+        <inputExpression id="LiteralExpression_1tzmil3" typeRef="number">
+          <text>monthlyIncome</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Customer Score" name="customerScore" typeRef="number" />
+      <rule id="DecisionRule_11ekubm">
+        <description>If we have bad experience we start with -15 points.</description>
+        <inputEntry id="UnaryTests_1ob002z">
+          <text>"Bad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08zcm9b">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nf0chn">
+          <text>-15</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13dz9dr">
+        <description>If we have good experience we start with +15 points.</description>
+        <inputEntry id="UnaryTests_1j1vg0a">
+          <text>"Good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_072mt5t">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0oi6jhq">
+          <text>15</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_129embx">
+        <description>For a very low income we deduct -10 points.</description>
+        <inputEntry id="UnaryTests_026vphm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10mwms5">
+          <text>&lt; 500</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tvnkrv">
+          <text>-10</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1uxgmbw">
+        <description>For a reasonable income we add 5 points.</description>
+        <inputEntry id="UnaryTests_0oifzce">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_199rse9">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15fqivj">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ptpjl4">
+        <description>For a good income we add 10 points extra.</description>
+        <inputEntry id="UnaryTests_1pxw47q">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10uwvf5">
+          <text>&gt;=2000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kbdwik">
+          <text>10</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="rating" name="Rating" />
+  <inputData id="monthlyIncome" name="Current monthly income" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="customerScoreDecision">
+        <dc:Bounds height="80" width="180" x="310" y="120" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1bgh8mw" dmnElementRef="rating">
+        <dc:Bounds height="45" width="125" x="158" y="288" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_13jrp0h" dmnElementRef="monthlyIncome">
+        <dc:Bounds height="45" width="125" x="487" y="288" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0g5lmqc" dmnElementRef="InformationRequirement_04uv42e">
+        <di:waypoint x="221" y="288" />
+        <di:waypoint x="370" y="220" />
+        <di:waypoint x="370" y="200" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_01y59xn" dmnElementRef="InformationRequirement_10zmdt0">
+        <di:waypoint x="550" y="288" />
+        <di:waypoint x="430" y="220" />
+        <di:waypoint x="430" y="200" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
