@@ -18,4 +18,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 USER $APP_UID
-ENTRYPOINT ["./ScoringAPI.dll"]
+ENTRYPOINT ["dotnet", "ScoringAPI.dll"]
