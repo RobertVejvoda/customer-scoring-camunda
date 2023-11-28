@@ -1,6 +1,6 @@
 namespace ScoringAPI.Camunda.Command;
 
-public record CreateInstanceWithResultResponse(
+public record CreateInstanceResponse(
     long? ProcessDefinitionKey,
     string? BpmnProcessId,
     int? Version,

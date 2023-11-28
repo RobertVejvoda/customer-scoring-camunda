@@ -11,11 +11,22 @@ Content-Type: application/json
 
 ###
 
-POST {{ScoringAPI_HostAddress}}/api/v1/customer/score/
+POST {{ScoringAPI_HostAddress}}/api/v1/customer/score
 Accept: application/json
 Content-Type: application/json
 
 {
-  "rating": "Bad",
+  "rating": "Good",
+  "monthlyIncome": 1000
+}
+
+###
+
+POST {{ScoringAPI_HostAddress}}/api/v1/customer/approve-reject
+Accept: application/json
+Content-Type: application/json
+
+{
+  "rating": "Good",
   "monthlyIncome": 1000
 }

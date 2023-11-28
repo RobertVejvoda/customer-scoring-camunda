@@ -44,9 +44,9 @@ It can be downloaded from https://camunda.com/download/modeler/.
 
 ## Run 
 
-Local: `dapr run --app-id scoring-api --app-port 6029 --components-path ../dapr/components -- dotnet run --urls http://localhost:5029`
+Local: `dapr run --app-id scoring-api --app-port 6029 --resources-path ../dapr/components -- dotnet run --urls http://localhost:5029`
 
-Docker: `docker compose -f docker-compose.yaml up -d`
+Docker: `docker compose -f docker-compose.yaml up -d --build`
 
 Open ScoringAPI.http and run requests.
 

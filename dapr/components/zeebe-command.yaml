@@ -7,8 +7,8 @@ spec:
   version: v1
   metadata:
     - name: gatewayAddr
-      value: host.docker.internal:26500
+      value: "host.docker.internal:26500"
     - name: gatewayKeepAlive
-      value: 45s
+      value: "45s"
     - name: usePlainTextConnection
       value: "true"

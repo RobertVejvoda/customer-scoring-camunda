@@ -11,14 +11,16 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5029:8080"
-         
+      - "6029:3500"
+      - "60029:50001"         
+  
   scoring-api-dapr:
     container_name: scoring-api-dapr
     image: daprio/daprd:1.12.0
     network_mode: "service:scoring-api"
     command: ["./daprd",
                "-app-id", "scoring-api",
-               "-app-port", "80",
+               "-app-port", "8080",
                "-components-path", "/components",
                "-config", "/configuration/zipkin.yaml"]
     depends_on: 
