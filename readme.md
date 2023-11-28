@@ -5,7 +5,7 @@ In this case with focus on synchronous workflow processing.
 
 ---
 
-Workflow handles a request to score customer according to his/her history and current monthly income. 
+Workflow handles a request to score customer according to his/her history and current monthly income.
 The scoring result could be used later for pricing and is done synchronously. This is useful in API calls and helps
 to break dependencies in code.
 
@@ -31,22 +31,22 @@ To test locally install Dapr as described on https://docs.dapr.io/getting-starte
 
 ## Camunda
 
-The process will be orchestrated by Camunda - in our case it's Camunda Platform 8. 
+The process will be orchestrated by Camunda - in our case it's Camunda Platform 8.
 
 `docker compose --env-file .env -f docker-compose-camunda.yaml up -d`
 
 Navigate to http://localhost:8081/login and use demo/demo for login.
 
-Now deploy the process. One way how to do it is from Camunda Modeler. 
+Now deploy the process. One way how to do it is from Camunda Modeler.
 It can be downloaded from https://camunda.com/download/modeler/.
 
 ![Deploy](./ScoringAPI/Camunda/img/process-deploy.png)
 
-## Run 
+## Run
 
-Local: `dapr run --app-id scoring-api --app-port 6029 --components-path ../dapr/components -- dotnet run --urls http://localhost:5029`
+Local: `dapr run --app-id scoring-api --app-port 6029 --resources-path ../dapr/components -- dotnet run --urls http://localhost:5029`
 
-Docker: `docker compose -f docker-compose.yaml up -d`
+Docker: `docker compose -f docker-compose.yaml up -d --build`
 
 Open ScoringAPI.http and run requests.
 
