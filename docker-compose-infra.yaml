@@ -154,10 +154,45 @@ services:
     profiles:
       - kibana
 
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    restart: unless-stopped
+    ports:
+      - "9414:9411"
+    networks:
+      - camunda-platform
+        
+  mongo:
+    container_name: mongo
+    image: mongo:5.0.15
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=demo
+      - MONGO_INITDB_ROOT_PASSWORD=demo
+    ports:
+      - "27017:27017"
+    networks:
+      - camunda-platform
+    volumes:
+      - mongo-data:/usr/share/mongo/data"
+  
+  maildev:
+    container_name: maildev
+    image: maildev/maildev
+    restart: unless-stopped
+    ports:
+      - "4000:1080"
+      - "4025:1025"
+    networks:
+      - camunda-platform
+
 volumes:
   zeebe:
   elastic:
   kibana:
+  mongo-data:
 
 networks:
   camunda-platform:

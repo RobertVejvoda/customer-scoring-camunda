@@ -1,0 +1,26 @@
+@startuml
+
+actor Customer
+participant "Customer API" as CustomerController
+participant "Zeebe" as DaprClient
+participant "Repository" as Repository
+
+Customer -> CustomerController: POST /api/v1/customer/score
+CustomerController -> CustomerController: generate request ID
+CustomerController -> DaprClient: start scoring process [request ID]
+DaprClient -> DaprClient: start scoring process async
+DaprClient -->CustomerController: process instance key 
+loop while customer not registered [every second]
+    CustomerController -> Repository: check if customer is registered
+    Repository --> CustomerController: customer registration status
+end
+CustomerController --> Customer: request ID, request time, customer ID
+
+Customer -> CustomerController: POST /api/v1/customer/upload-document
+CustomerController -> CustomerController: Save document to temp storage
+CustomerController -> DaprClient: Invoke upload document process
+DaprClient -> DaprClient: upload document process async
+DaprClient --> CustomerController: request ID
+CustomerController --> Customer: upload result
+
+@enduml

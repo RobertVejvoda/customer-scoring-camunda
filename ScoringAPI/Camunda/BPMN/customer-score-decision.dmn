@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1xd4hme" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1xd4hme" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.28.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
   <decision id="customerScoreDecision" name="Customer Score">
     <informationRequirement id="InformationRequirement_04uv42e">
       <requiredInput href="#rating" />
@@ -7,7 +7,7 @@
     <informationRequirement id="InformationRequirement_10zmdt0">
       <requiredInput href="#monthlyIncome" />
     </informationRequirement>
-    <decisionTable id="DecisionTable_1szgw37" hitPolicy="COLLECT" aggregation="SUM">
+    <decisionTable id="DecisionTable_1szgw37" hitPolicy="FIRST">
       <input id="Input_1" label="Rating (past experience)">
         <inputExpression id="InputExpression_1" typeRef="string">
           <text>rating</text>
@@ -19,64 +19,181 @@
         </inputExpression>
       </input>
       <output id="Output_1" label="Customer Score" name="customerScore" typeRef="number" />
-      <rule id="DecisionRule_11ekubm">
-        <description>If we have bad experience we start with -15 points.</description>
-        <inputEntry id="UnaryTests_1ob002z">
+      <rule id="DecisionRule_1qnfy48">
+        <inputEntry id="UnaryTests_1wpk6l3">
           <text>"Bad"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_08zcm9b">
-          <text></text>
+        <inputEntry id="UnaryTests_1ybmvl8">
+          <text>[100..999]</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0nf0chn">
-          <text>-15</text>
+        <outputEntry id="LiteralExpression_0zg0aq2">
+          <text>20</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_13dz9dr">
-        <description>If we have good experience we start with +15 points.</description>
-        <inputEntry id="UnaryTests_1j1vg0a">
+      <rule id="DecisionRule_1sp96x2">
+        <inputEntry id="UnaryTests_150mftt">
+          <text>"Bad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ends26">
+          <text>[1000..1999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lw8lw2">
+          <text>25</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_03c2rf3">
+        <inputEntry id="UnaryTests_0atdk52">
+          <text>"Bad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v4vfu1">
+          <text>[2000..2999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0j5b1v9">
+          <text>30</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0iq227b">
+        <inputEntry id="UnaryTests_057otxg">
+          <text>"Bad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15xpl3f">
+          <text>[3000..3999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1maslof">
+          <text>35</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0tvtid7">
+        <inputEntry id="UnaryTests_0p6gu4c">
+          <text>"Bad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y941q7">
+          <text>&gt;= 4000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_117had8">
+          <text>40</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k8024c">
+        <inputEntry id="UnaryTests_1qbuoi6">
+          <text>"Neutral"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17n9oqr">
+          <text>[100..999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1p87u8l">
+          <text>50</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04fc8n9">
+        <inputEntry id="UnaryTests_092iro7">
+          <text>"Neutral"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rx3i8j">
+          <text>[1000..1999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1reinzv">
+          <text>55</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xqrxgk">
+        <inputEntry id="UnaryTests_069qrgn">
+          <text>"Neutral"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gkvw0w">
+          <text>[2000..2999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pd53fm">
+          <text>60</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13z6u2r">
+        <inputEntry id="UnaryTests_0kf6zua">
+          <text>"Neutral"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rppapu">
+          <text>[3000..3999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jbhi8w">
+          <text>65</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m47r6j">
+        <inputEntry id="UnaryTests_0qhqj9h">
+          <text>"Neutral"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uyys6x">
+          <text>&gt;= 4000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1owi48i">
+          <text>70</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0aib12j">
+        <inputEntry id="UnaryTests_1lf3qwu">
           <text>"Good"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_072mt5t">
-          <text></text>
+        <inputEntry id="UnaryTests_096wtdz">
+          <text>[100..999]</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0oi6jhq">
-          <text>15</text>
+        <outputEntry id="LiteralExpression_099a609">
+          <text>80</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_129embx">
-        <description>For a very low income we deduct -10 points.</description>
-        <inputEntry id="UnaryTests_026vphm">
-          <text></text>
+      <rule id="DecisionRule_15igt3h">
+        <inputEntry id="UnaryTests_0ed84vp">
+          <text>"Good"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_10mwms5">
-          <text>&lt; 500</text>
+        <inputEntry id="UnaryTests_0j9ddbp">
+          <text>[1000..1999]</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1tvnkrv">
-          <text>-10</text>
+        <outputEntry id="LiteralExpression_1oucmga">
+          <text>85</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_1uxgmbw">
-        <description>For a reasonable income we add 5 points.</description>
-        <inputEntry id="UnaryTests_0oifzce">
-          <text></text>
+      <rule id="DecisionRule_1fxwlof">
+        <inputEntry id="UnaryTests_0wggoip">
+          <text>"Good"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_199rse9">
-          <text>&gt;= 1000</text>
+        <inputEntry id="UnaryTests_1h8uuu1">
+          <text>[2000..2999]</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_15fqivj">
-          <text>5</text>
+        <outputEntry id="LiteralExpression_1o36zuh">
+          <text>90</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0ptpjl4">
-        <description>For a good income we add 10 points extra.</description>
-        <inputEntry id="UnaryTests_1pxw47q">
+      <rule id="DecisionRule_0uoxtst">
+        <inputEntry id="UnaryTests_01yepyb">
+          <text>"Good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02myar3">
+          <text>[3000..3999]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yw5rvk">
+          <text>95</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0npnflm">
+        <inputEntry id="UnaryTests_13qt20z">
+          <text>"Good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a93hbn">
+          <text>&gt;= 4000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04m3kwk">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1lbirr7">
+        <description>Out ouf bound</description>
+        <inputEntry id="UnaryTests_1svv2o0">
           <text></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_10uwvf5">
-          <text>&gt;=2000</text>
+        <inputEntry id="UnaryTests_0kv1btn">
+          <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0kbdwik">
-          <text>10</text>
+        <outputEntry id="LiteralExpression_1rl3abl">
+          <text>0</text>
         </outputEntry>
       </rule>
     </decisionTable>

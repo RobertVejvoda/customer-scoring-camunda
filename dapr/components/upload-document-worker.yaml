@@ -1,0 +1,31 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: upload-document
+spec:
+  type: bindings.zeebe.jobworker
+  version: v1
+  metadata:
+    - name: gatewayAddr
+      value: "host.docker.internal:26500"
+    - name: gatewayKeepAlive
+      value: "45s"
+    - name: usePlainTextConnection
+      value: "true"
+    - name: workerName
+      value: "upload-document-worker"
+    - name: workerTimeout
+      value: "30s"
+    - name: requestTimeout
+      value: "15s"
+    - name: jobType
+      value: "upload-document"
+    - name: maxJobsActive
+      value: "32"
+    - name: concurrency
+      value: "4"
+    - name: pollInterval
+      value: "100ms"
+    - name: pollThreshold
+      value: "0.3"
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1n7wtu3" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.28.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+  <decision id="customerEligibilityDecision" name="Customer Eligibility">
+    <informationRequirement id="InformationRequirement_1fasy93">
+      <requiredInput href="#InputData_1ikwtv6" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1urqq6f">
+      <input id="Input_1" label="Customer Score">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>customerScore</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Is eligible" name="isEligible" typeRef="boolean" />
+      <rule id="DecisionRule_01yij00">
+        <description>Not eligible</description>
+        <inputEntry id="UnaryTests_1e1k0ya">
+          <text>&lt; 60</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18yxie2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1uj62kg">
+        <description>Eligible</description>
+        <inputEntry id="UnaryTests_0fkexy7">
+          <text>&gt;= 60</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mm428x">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1ikwtv6" name="Customer Score" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="customerEligibilityDecision">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_14yc00d" dmnElementRef="InputData_1ikwtv6">
+        <dc:Bounds height="45" width="125" x="188" y="227" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1xkqveg" dmnElementRef="InformationRequirement_1fasy93">
+        <di:waypoint x="251" y="227" />
+        <di:waypoint x="250" y="180" />
+        <di:waypoint x="250" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

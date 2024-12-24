@@ -20,4 +20,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Controllers\CustomerV2Controller.cs" />
+    </ItemGroup>
+
 </Project>

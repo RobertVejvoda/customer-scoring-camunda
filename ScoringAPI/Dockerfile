@@ -1,21 +1,24 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 5029
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ENV ASPNETCORE_URLS=http://+:5029
+
+USER app
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG configuration=Release
 WORKDIR /src
 COPY ["ScoringAPI/ScoringAPI.csproj", "ScoringAPI/"]
 RUN dotnet restore "ScoringAPI/ScoringAPI.csproj"
 COPY . .
 WORKDIR "/src/ScoringAPI"
-RUN dotnet build "ScoringAPI.csproj" -c Release -o /app/build
+RUN dotnet build "ScoringAPI.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ScoringAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+ARG configuration=Release
+RUN dotnet publish "ScoringAPI.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-USER $APP_UID
 ENTRYPOINT ["dotnet", "ScoringAPI.dll"]

@@ -5,7 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABD7F75B-FF58-4E3B-A84A-A64D3BA76BD5}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
-		docker-compose-camunda.yaml = docker-compose-camunda.yaml
+		docker-compose-infra.yaml = docker-compose-infra.yaml
 		.env = .env
 	EndProjectSection
 EndProject

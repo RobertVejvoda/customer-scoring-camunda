@@ -1,21 +1,44 @@
-@ScoringAPI_HostAddress = http://localhost:5029
+@baseUrl = http://localhost:5029/api/v1/customer
+@customerId = amfuzs53b29kbgfuzeblegftcgxllmnvbq
+@requestId = 0ba1a132-ed5c-419c-bc42-f2a91a4285ea
 
-POST {{ScoringAPI_HostAddress}}/api/v1/customer/score/
-Accept: application/json
+
+### Score customer
+
+POST {{baseUrl}}/score
 Content-Type: application/json
 
 {
-  "rating": "Bad",
-  "monthlyIncome": 500
+  "customerName": "Jane Woodland",
+  "customerEmail": "jane.woodland@example.com",
+  "customerPhone": "12345671231",
+  "monthlyIncome": 5000
 }
 
-###
+### Get customer
 
-POST {{ScoringAPI_HostAddress}}/api/v1/customer/score/
-Accept: application/json
+GET {{baseUrl}}/{{customerId}}
 Content-Type: application/json
 
-{
-  "rating": "Bad",
-  "monthlyIncome": 1000
-}
+
+### Upload document
+
+POST {{baseUrl}}/upload-document
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="requestId"
+Content-Type: text/plain
+
+{{requestId}}
+--boundary
+Content-Disposition: form-data; name="customerId"
+Content-Type: text/plain
+
+{{customerId}}
+--boundary
+Content-Disposition: form-data; name="document"; filename="doc1.txt"
+Content-Type: application/octet-stream
+
+@./documents/doc1.txt
+--boundary--

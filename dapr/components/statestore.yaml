@@ -1,0 +1,25 @@
+# nonk8s
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.mongodb
+  version: v1
+  metadata:
+    - name: host
+      value: "host.docker.internal:27017" # Required unless "server" field is set . Example: "mongo-mongodb.default.svc.cluster.local:27017"
+    - name: operationTimeout
+      value: "5s" # Optional. default: "5s"
+    - name: actorStateStore
+      value: "false"
+    - name: username
+      value: "demo"
+    - name: password
+      value: "demo"
+    - name: databaseName
+      value: "daprStore" # Optional. default: "daprStore"
+    - name: collectionName
+      value: "daprCollection" # Optional. default: "daprCollection"
+    - name: params
+      value: "?authSource=admin&ssl=false"
